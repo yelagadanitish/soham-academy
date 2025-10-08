@@ -1,0 +1,2966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soham Academy Challenges</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --bronze: #cd7f32;
+            --silver: #c0c0c0;
+            --gold: #ffd700;
+            --platinum: #e5e4e2;
+            --diamond: #b9f2ff;
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+
+        body {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--light);
+            border: 3px solid var(--light);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--gold), var(--diamond));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .challenges-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .challenge-box {
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .challenge-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .challenge-box:hover .challenge-inner {
+            transform: rotateY(180deg);
+        }
+
+        .challenge-front, .challenge-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .challenge-front {
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            -webkit-backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .challenge-back {
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            transform: rotateY(180deg);
+            justify-content: space-around;
+            backdrop-filter: blur(10px);
+        }
+
+        .bronze .challenge-front {
+            border: 3px solid var(--bronze);
+        }
+
+        .silver .challenge-front {
+            border: 3px solid var(--silver);
+        }
+
+        .gold .challenge-front {
+            border: 3px solid var(--gold);
+        }
+
+        .platinum .challenge-front {
+            border: 3px solid var(--platinum);
+        }
+
+        .diamond .challenge-front {
+            border: 3px solid var(--diamond);
+        }
+
+        .challenge-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .bronze .challenge-icon {
+            color: var(--bronze);
+        }
+
+        .silver .challenge-icon {
+            color: var(--silver);
+        }
+
+        .gold .challenge-icon {
+            color: var(--gold);
+        }
+
+        .platinum .challenge-icon {
+            color: var(--platinum);
+        }
+
+        .diamond .challenge-icon {
+            color: var(--diamond);
+        }
+
+        .challenge-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .option-btn {
+            padding: 12px 20px;
+            width: 80%;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .pdf-btn {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+        }
+
+        .code-btn {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #793d1f, #2a5298);
+            width: 90%;
+            max-width: 900px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            padding: 20px 0;
+        }
+
+        .pdf-viewer-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pdf-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .pdf-control-btn {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pdf-control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .code-content {
+            background: #2d3748;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.5;
+        }
+
+        .code-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .background-animation span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .background-animation span:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .background-animation span:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .background-animation span:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .background-animation span:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .background-animation span:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .background-animation span:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .background-animation span:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .background-animation span:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .background-animation span:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .background-animation span:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .challenge-box {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .challenge-icon {
+                font-size: 2.5rem;
+            }
+            
+            .challenge-title {
+                font-size: 1.2rem;
+            }
+            
+            .option-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .pdf-viewer-container {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .challenges-container {
+                gap: 15px;
+            }
+            
+            .challenge-box {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .challenge-icon {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+            
+            .challenge-title {
+                font-size: 1rem;
+            }
+            
+            .option-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .modal-title {
+                font-size: 1.8rem;
+            }
+            
+            .pdf-viewer-container {
+                height: 300px;
+            }
+            
+            .code-content {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Soham Academy Challenges</h1>
+            <p class="tagline">Inspired by Soham Academy's mission to provide quality education, these challenges are designed to test and enhance your skills. Push your boundaries and unlock your potential!</p>
+        </header>
+
+        <div class="challenges-container">
+            <div class="challenge-box bronze">
+                <div class="challenge-inner">
+                    <div class="challenge-front">
+                        <div class="challenge-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="challenge-title">Bronze Challenge</h3>
+                    </div>
+                    <div class="challenge-back">
+                        <button class="option-btn pdf-btn" onclick="openModal('bronze', 'pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="option-btn code-btn" onclick="openModal('bronze', 'code')">
+                            <i class="fas fa-code"></i> Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-box silver">
+                <div class="challenge-inner">
+                    <div class="challenge-front">
+                        <div class="challenge-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="challenge-title">Silver Challenge</h3>
+                    </div>
+                    <div class="challenge-back">
+                        <button class="option-btn pdf-btn" onclick="openModal('silver', 'pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="option-btn code-btn" onclick="openModal('silver', 'code')">
+                            <i class="fas fa-code"></i> Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-box gold">
+                <div class="challenge-inner">
+                    <div class="challenge-front">
+                        <div class="challenge-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="challenge-title">Gold Challenge</h3>
+                    </div>
+                    <div class="challenge-back">
+                        <button class="option-btn pdf-btn" onclick="openModal('gold', 'pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="option-btn code-btn" onclick="openModal('gold', 'code')">
+                            <i class="fas fa-code"></i> Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-box platinum">
+                <div class="challenge-inner">
+                    <div class="challenge-front">
+                        <div class="challenge-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="challenge-title">Platinum Challenge</h3>
+                    </div>
+                    <div class="challenge-back">
+                        <button class="option-btn pdf-btn" onclick="openModal('platinum', 'pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="option-btn code-btn" onclick="openModal('platinum', 'code')">
+                            <i class="fas fa-code"></i> Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-box diamond">
+                <div class="challenge-inner">
+                    <div class="challenge-front">
+                        <div class="challenge-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="challenge-title">Diamond Challenge</h3>
+                    </div>
+                    <div class="challenge-back">
+                        <button class="option-btn pdf-btn" onclick="openModal('diamond', 'pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="option-btn code-btn" onclick="openModal('diamond', 'code')">
+                            <i class="fas fa-code"></i> Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <div class="modal-header">
+                    <h2 id="modal-title">Challenge Content</h2>
+                </div>
+                <div class="modal-body">
+                    <div id="pdf-content">
+                        <div class="pdf-viewer-container">
+                            <iframe id="pdf-viewer" class="pdf-viewer" src="" frameborder="0"></iframe>
+                        </div>
+                        <div class="pdf-controls">
+                            <a id="download-pdf-link" href="#" class="pdf-control-btn" download>
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                            <button class="pdf-control-btn" onclick="printPdf()">
+                                <i class="fas fa-print"></i> Print PDF
+                            </button>
+                        </div>
+                    </div>
+                    <div id="code-content" style="display: none;">
+                        <div class="code-content" id="code-text"></div>
+                        <div class="code-controls">
+                            <a id="download-zip-link" href="#" class="pdf-control-btn" download>
+                                <i class="fas fa-download"></i> Download ZIP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Inspired by <a href="https://sohamacademy.org/" target="_blank" rel="noopener">Soham Academy</a> - Empowering Education</p>
+            <p>© 2025 Soham Academy Challenges. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const challengeContent = {
+            bronze: {
+                pdf: {
+                    title: "Bronze Challenge PDF",
+                    url: "https://drive.google.com/file/d/1ndg0r1SdiwzTQAuQbe8_9dXph675hESF/preview",
+                    filename: "bronze-challenge.pdf"
+                },
+                code: {
+                    title: "Bronze Challenge Code",
+                    content: `/*********************************************************
+Project Title: Unified Code for Multiple Activities
+Organisation: Texoham Centre For Advanced Computing
+Website: https://www.texoham.ai
+*********************************************************/
+
+#include <Servo.h>
+#include <TM1637Display.h>
+
+// Shared Pins
+const int PIN_D2 = 2;   // Shared by Emergency Alert (button), Simple Counter (DIO)
+const int PIN_D3 = 3;   // Shared by Emergency Alert (LED), Simple Counter (CLK)
+const int PIN_D4 = 4;   // Emergency Alert (buzzer)
+const int PIN_D5 = 5;   // Touchless Doorbell (buzzer)
+const int PIN_D6 = 6;   // Simple Counter (LED)
+const int PIN_D7 = 7;   // Touch Sensor Controlled Servo (LED)
+const int PIN_D8 = 8;   // Touch Sensor Controlled Servo (touch sensor)
+const int PIN_D9 = 9;   // Shared by Touch Sensor Controlled Servo (servo), Sunflower (servo)
+const int PIN_D10 = 10; // Used for error indication (previously D13)
+const int PIN_D12 = 12; // Touchless Doorbell (trig)
+const int PIN_D13 = 13; // Touchless Doorbell (echo)
+const int PIN_ANALOG_A1 = A1; // Sunflower (LDR left)
+const int PIN_ANALOG_A2 = A2; // Sunflower (LDR right)
+
+// Component Detection Pins
+const int DETECT_PINS[] = {
+  PIN_D2, PIN_D3, PIN_D4, PIN_D5, PIN_D6, PIN_D7, PIN_D8, PIN_D9, PIN_D12, PIN_D13
+};
+const int DETECT_PIN_COUNT = sizeof(DETECT_PINS) / sizeof(DETECT_PINS[0]);
+
+// Activity States
+enum Activity {
+  NONE,
+  EMERGENCY_ALERT,
+  TOUCHLESS_DOORBELL,
+  TOUCH_SENSOR_CONTROLLED_SERVO,
+  SIMPLE_COUNTER,
+  SUNFLOWER
+};
+
+// Global Variables
+Activity currentActivity = NONE;
+bool activityLocked = false;
+
+// Timing Variables
+unsigned long lastDebounceTime = 0;
+const unsigned long DEBOUNCE_DELAY = 50;
+unsigned long lastActivityCheck = 0;
+const unsigned long ACTIVITY_CHECK_INTERVAL = 1000;
+
+// Error Handling
+bool errorState = false;
+unsigned long lastErrorBlink = 0;
+const unsigned long ERROR_BLINK_INTERVAL = 500;
+
+// Objects
+Servo myServo;
+TM1637Display display(PIN_D3, PIN_D2); // CLK, DIO
+
+// Activity-Specific Variables
+// Emergency Alert
+const int alertButtonPin = PIN_D2;
+const int alertLedPin = PIN_D3;
+const int alertBuzzerPin = PIN_D4;
+const unsigned long alertDuration = 10000;
+const int alertBlinkInterval = 250;
+volatile bool systemActive = false;
+unsigned long alertStartTime = 0;
+bool alertLedState = false;
+unsigned long alertLastBlink = 0;
+
+// Touchless Doorbell
+const int doorbellTrigPin = PIN_D12;
+const int doorbellEchoPin = PIN_D13;
+const int doorbellBuzzerPin = PIN_D5;
+int doorbellMelody[] = {262, 196, 196, 220, 196, 0, 247, 262};
+int doorbellNoteDurations[] = {4, 8, 8, 4, 4, 4, 4, 4};
+
+// Touch Sensor Controlled Servo
+const int touchServoPin = PIN_D9;
+const int touchSensorPin = PIN_D8;
+const int touchLedPin = PIN_D7;
+int touchState = 0;
+int touchDirectionState = 0;
+int touchPos = 0;
+
+// Simple Counter
+const int counterClkPin = PIN_D3;
+const int counterDioPin = PIN_D2;
+const int counterLedPin = PIN_D6;
+int counterValue = 0;
+
+// Sunflower
+const int sunflowerServoPin = PIN_D9;
+const int ldrLeftPin = PIN_ANALOG_A1;
+const int ldrRightPin = PIN_ANALOG_A2;
+int ldrValueLeft = 0;
+int ldrValueRight = 0;
+int sunflowerServoAngle = 90;
+const int sunflowerStepSize = 5;
+const int sunflowerTolerance = 20;
+
+// Function Prototypes
+void detectComponents();
+void enterStandbyMode();
+void indicateError();
+bool checkPinActivity(int pin);
+bool analogDetect(int pin);
+void runEmergencyAlert();
+void runTouchlessDoorbell();
+void runTouchSensorControlledServo();
+void runSimpleCounter();
+void runSunflower();
+
+// Execution Functions (Grouped Together)
+
+// Emergency Alert Pins:
+// button = D2, led = D3, buzzer = D4
+// Description: Toggles an alert system with a button, blinking LED and buzzer for 10 seconds, then steady LED.
+void runEmergencyAlert() {
+  if (systemActive) {
+    unsigned long currentTime = millis();
+    
+    // Alert phase: Blink LED and sound buzzer for 10 seconds
+    if (currentTime - alertStartTime < alertDuration) {
+      if (currentTime - alertLastBlink >= alertBlinkInterval) {
+        alertLedState = !alertLedState;
+        digitalWrite(alertLedPin, alertLedState);
+        digitalWrite(alertBuzzerPin, alertLedState);
+        alertLastBlink = currentTime;
+      }
+    } else {
+      digitalWrite(alertLedPin, HIGH);
+      digitalWrite(alertBuzzerPin, LOW);
+    }
+  } else {
+    digitalWrite(alertLedPin, LOW);
+    digitalWrite(alertBuzzerPin, LOW);
+  }
+}
+
+// Touchless Doorbell Pins:
+// trig = D12, echo = D13, buzzer = D5
+// Description: Plays a melody when an object is within 20cm, detected by an ultrasonic sensor.
+void runTouchlessDoorbell() {
+  static unsigned long lastCheck = 0;
+  const unsigned long CHECK_INTERVAL = 50;
+
+  if (millis() - lastCheck >= CHECK_INTERVAL) {
+    digitalWrite(doorbellTrigPin, LOW);
+    delayMicroseconds(5);
+    digitalWrite(doorbellTrigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(doorbellTrigPin, LOW);
+
+    long duration = pulseIn(doorbellEchoPin, HIGH);
+    if (duration <= 600 && duration > 0) {
+      for (int thisNote = 0; thisNote < 8; thisNote++) {
+        int noteDuration = 1000 / doorbellNoteDurations[thisNote];
+        tone(doorbellBuzzerPin, doorbellMelody[thisNote], noteDuration);
+        int pauseBetweenNotes = noteDuration * 1.30;
+        delay(pauseBetweenNotes);
+      }
+    } else {
+      noTone(doorbellBuzzerPin);
+    }
+
+    Serial.print(F("Duration: "));
+    Serial.print(duration);
+    Serial.println(F(" us"));
+
+    lastCheck = millis();
+  }
+}
+
+// Touch Sensor Controlled Servo Pins:
+// servo = D9, touch = D8, led = D7
+// Description: Toggles a servo and LED based on touch sensor input, with serial status messages.
+void runTouchSensorControlledServo() {
+  touchState = digitalRead(touchSensorPin);
+  if (touchDirectionState == 0) {
+    if (touchState == HIGH) {
+      touchDirectionState = 1;
+      Serial.println(F("Status: Unlocked"));
+      Serial.println(F("Touch to Lock"));
+      for (touchPos = 0; touchPos < 180; touchPos += 1) {
+        digitalWrite(touchLedPin, HIGH);
+        myServo.write(touchPos);
+        delay(15);
+      }
+    }
+  } else if (touchDirectionState == 1) {
+    if (touchState == HIGH) {
+      touchDirectionState = 0;
+      Serial.println(F("Status: Locked"));
+      Serial.println(F("Touch to Unlock"));
+      for (touchPos = 180; touchPos >= 1; touchPos -= 1) {
+        digitalWrite(touchLedPin, LOW);
+        myServo.write(touchPos);
+        delay(15);
+      }
+    }
+  }
+}
+
+// Simple Counter Pins:
+// clk = D3, dio = D2, led = D6
+// Description: Displays an incrementing counter on a TM1637 display, lighting an LED for multiples of 5.
+void runSimpleCounter() {
+  static unsigned long lastUpdate = 0;
+  const unsigned long UPDATE_INTERVAL = 1000;
+
+  if (digitalRead(counterClkPin) == LOW || digitalRead(counterDioPin) == LOW) {
+    Serial.println(F("Error: CLK or DIO pin disconnected"));
+    digitalWrite(counterLedPin, LOW);
+    errorState = true;
+    return;
+  }
+
+  if (millis() - lastUpdate >= UPDATE_INTERVAL) {
+    display.showNumberDec(counterValue);
+    digitalWrite(counterLedPin, (counterValue % 5 == 0) ? HIGH : LOW);
+    counterValue = (counterValue < 9999) ? counterValue + 1 : 0;
+    lastUpdate = millis();
+  }
+}
+
+// Sunflower Pins:
+// servo = D9, ldrLeft = A1, ldrRight = A2
+// Description: Moves a servo to follow light using two LDRs, with serial output.
+void runSunflower() {
+  const int samples = 5;
+  long sumLeft = 0, sumRight = 0;
+  for (int i = 0; i < samples; i++) {
+    sumLeft += analogRead(ldrLeftPin);
+    sumRight += analogRead(ldrRightPin);
+    delay(10);
+  }
+  ldrValueLeft = sumLeft / samples;
+  ldrValueRight = sumRight / samples;
+
+  Serial.print(F("Left LDR: "));
+  Serial.print(ldrValueLeft);
+  Serial.print(F(" | Right LDR: "));
+  Serial.print(ldrValueRight);
+  Serial.print(F(" | Servo Angle: "));
+  Serial.println(sunflowerServoAngle);
+
+  if (ldrValueLeft > ldrValueRight + sunflowerTolerance) {
+    if (sunflowerServoAngle < 180) {
+      sunflowerServoAngle += sunflowerStepSize;
+      myServo.write(sunflowerServoAngle);
+    }
+  } else if (ldrValueRight > ldrValueLeft + sunflowerTolerance) {
+    if (sunflowerServoAngle > 0) {
+      sunflowerServoAngle -= sunflowerStepSize;
+      myServo.write(sunflowerServoAngle);
+    }
+  }
+
+  delay(100);
+}
+
+// Helper Function for Pin Activity
+bool checkPinActivity(int pin) {
+  return digitalRead(pin) == LOW;
+}
+
+// Helper Function for Analog Detection
+bool analogDetect(int pin) {
+  const int samples = 5;
+  const int iterations = 2;
+  int iter = 0;
+  while (iter < iterations) {
+    long sumReadings = 0;
+    for (int i = 0; i < samples; i++) {
+      sumReadings += analogRead(pin);
+      delay(10);
+    }
+    int avgValue = sumReadings / samples;
+    Serial.print(F("Iteration "));
+    Serial.print(iter + 1);
+    Serial.print(F(" | Analog Value: "));
+    Serial.println(avgValue);
+    if (avgValue >= 50 && avgValue <= 1000) {
+      iter++;
+      if (iter >= iterations) return true;
+    } else {
+      return false;
+    }
+    delay(100);
+  }
+  Serial.println(F("Analog NOT Detected"));
+  return false;
+}
+
+// Helper Function for Standby Mode
+void enterStandbyMode() {
+  static unsigned long lastBlink = 0;
+  if (millis() - lastBlink >= ERROR_BLINK_INTERVAL) {
+    digitalWrite(PIN_D10, !digitalRead(PIN_D10));
+    lastBlink = millis();
+  }
+}
+
+// Helper Function for Error Indication
+void indicateError() {
+  if (millis() - lastErrorBlink >= ERROR_BLINK_INTERVAL) {
+    digitalWrite(PIN_D10, !digitalRead(PIN_D10));
+    Serial.println(F("Error: Component disconnected"));
+    lastErrorBlink = millis();
+  }
+}
+
+// Interrupt Service Routine for Emergency Alert
+void buttonISR() {
+  static unsigned long lastInterruptTime = 0;
+  unsigned long interruptTime = millis();
+  if (interruptTime - lastInterruptTime > 200 && currentActivity == EMERGENCY_ALERT) {
+    systemActive = !systemActive;
+    if (systemActive) {
+      alertStartTime = millis();
+      alertLastBlink = alertStartTime;
+      alertLedState = false;
+    }
+    lastInterruptTime = interruptTime;
+  }
+}
+
+// Component Detection Logic
+void detectComponents() {
+  if (activityLocked) return;
+  myServo.detach(); // Detach servo to free resources
+  display.clear(); // Clear display
+  Serial.println(F("Detecting components..."));
+
+  // Emergency Alert Detection
+  // Requires: Button (D2), LED (D3), buzzer (D4)
+  if (checkPinActivity(PIN_D3) && checkPinActivity(PIN_D4)) {
+    currentActivity = EMERGENCY_ALERT;
+    pinMode(PIN_D2, INPUT_PULLUP);
+    pinMode(PIN_D3, OUTPUT);
+    pinMode(PIN_D4, OUTPUT);
+    attachInterrupt(digitalPinToInterrupt(PIN_D2), buttonISR, FALLING);
+    Serial.println(F("Activity: Emergency Alert Detected - Running"));
+    activityLocked = true;
+  }
+  
+  // Touchless Doorbell Detection
+  // Requires: Ultrasonic sensor (D12, D13), buzzer (D5)
+  else if (checkPinActivity(PIN_D5) && checkPinActivity(PIN_D13)) {
+    currentActivity = TOUCHLESS_DOORBELL;
+    pinMode(PIN_D12, OUTPUT);
+    pinMode(PIN_D13, INPUT);
+    pinMode(PIN_D5, OUTPUT);
+    Serial.println(F("Activity: Touchless Doorbell Detected - Running"));
+    activityLocked = true;
+  }
+  
+  // Touch Sensor Controlled Servo Detection
+  // Requires: Touch sensor (D8), servo (D9), LED (D7)
+  else if (checkPinActivity(PIN_D7) && checkPinActivity(PIN_D8)) {
+    currentActivity = TOUCH_SENSOR_CONTROLLED_SERVO;
+    pinMode(PIN_D8, INPUT);
+    pinMode(PIN_D7, OUTPUT);
+    digitalWrite(PIN_D7,LOW);
+    myServo.attach(PIN_D9);
+    Serial.println(F("Activity: Touch Sensor Controlled Servo Detected - Running"));
+    activityLocked = true;
+  }
+  
+  // Simple Counter Detection
+  // Requires: TM1637 display (D2, D3), LED (D6)
+  else if (checkPinActivity(PIN_D6)) {
+    currentActivity = SIMPLE_COUNTER;
+    pinMode(PIN_D6, OUTPUT);
+    digitalWrite(PIN_D6,LOW);
+    display.setBrightness(0x0a);
+    Serial.println(F("Activity: Simple Counter Detected - Running"));
+    activityLocked = true;
+  }
+  
+  // Sunflower Detection
+  // Requires: Servo (D9), LDRs (A1, A2)
+//  else if (checkPinActivity(PIN_D9) && analogDetect(PIN_ANALOG_A1) && analogDetect(PIN_ANALOG_A2) &&
+//           !checkPinActivity(PIN_D2) && !checkPinActivity(PIN_D3) && !checkPinActivity(PIN_D7)) {
+  else{
+    currentActivity = SUNFLOWER;
+    pinMode(PIN_ANALOG_A1, INPUT);
+    pinMode(PIN_ANALOG_A2, INPUT);
+    myServo.attach(PIN_D9);
+    myServo.write(sunflowerServoAngle);
+    Serial.println(F("Activity: Sunflower Detected - Running"));
+    activityLocked = true;
+  }
+  
+  // No Activity Detected
+//  else {
+//    currentActivity = NONE;
+//    Serial.println(F("No valid components detected - Entering standby mode"));
+//  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  for (int i = 0; i < DETECT_PIN_COUNT; i++) {
+    pinMode(DETECT_PINS[i], INPUT_PULLUP);
+  }
+  pinMode(PIN_D10, OUTPUT); // For error indication
+  detectComponents();
+}
+
+void loop() {
+  if (errorState) {
+    indicateError();
+    return;
+  }
+  if (!activityLocked) {
+    if (millis() - lastActivityCheck >= ACTIVITY_CHECK_INTERVAL) {
+      detectComponents();
+      lastActivityCheck = millis();
+    }
+  }
+  
+  switch (currentActivity) {
+    case EMERGENCY_ALERT: runEmergencyAlert(); break;
+    case TOUCHLESS_DOORBELL: runTouchlessDoorbell(); break;
+    case TOUCH_SENSOR_CONTROLLED_SERVO: runTouchSensorControlledServo(); break;
+    case SIMPLE_COUNTER: runSimpleCounter(); break;
+    case SUNFLOWER: runSunflower(); break;
+    case NONE: enterStandbyMode(); break;
+  }
+}`,
+                    zipUrl: "https://drive.google.com/file/d/18jI326AuTsOCnm1LApVaVlOAflYE8KQo/preview",
+                    zipFilename: "bronze-challenge-code.zip"
+                }
+            },
+            silver: {
+                pdf: {
+                    title: "Silver Challenge PDF",
+                    url: "https://drive.google.com/file/d/1uEbdKiVReaBnOSZfhOSG7V_97pXwZwNJ/preview",
+                    filename: "silver-challenge.pdf"
+                },
+                code: {
+                    title: "Silver Challenge Code",
+                    content: `/*********************************************************
+Project Title: Unified Code for Multiple Activities
+Organisation: Texoham Centre For Advanced Computing & Soham Academy Of Human Excellence
+Websites: https://www.texoham.ai, https://ria.sohamacademy.org/
+*********************************************************/
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Servo.h>
+#include <SoftwareSerial.h>
+#include <LedControl.h>
+
+// Shared Pins
+const int PIN_D0 = 0;   // RX for Wireless Notice Board
+const int PIN_D1 = 1;   // TX for Wireless Notice Board
+const int PIN_D2 = 2;   // Shared: Joystick SW (Joystick LEDs, RGB), Dot Matrix CLK (Visitor Counter)
+const int PIN_D3 = 3;   // Shared: Dot Matrix CS (Visitor Counter)
+const int PIN_D4 = 4;   // Shared: Dot Matrix DIN (Visitor Counter), RGB Red (Joystick RGB)
+const int PIN_D5 = 5;   // Shared: RGB Blue (Joystick RGB)
+const int PIN_D6 = 6;   // Shared: Buzzer (Visitor Counter), RGB Green (Joystick RGB)
+const int PIN_D7 = 7;
+const int PIN_D8 = 8;   // Shared: LED Type Pin (Joystick RGB)
+const int PIN_D9 = 9;   // Shared: Servo (Bluetooth Servo, Servo Distance)
+const int PIN_D10 = 10; // Shared: Buzzer (Joystick RGB), Down LED (Joystick LEDs)
+const int PIN_D11 = 11; // Shared: Right LED (Joystick LEDs)
+const int PIN_D12 = 12; // Shared: Ultrasonic Trig (Visitor Counter, Servo Distance), LED (Clap Switch)
+const int PIN_D13 = 13; // Shared: Ultrasonic Echo (Visitor Counter, Servo Distance), Left LED (Joystick LEDs)
+const int PIN_ANALOG_A0 = A0; // Shared: Joystick X (Joystick LEDs, RGB), Sound Sensor (Clap Switch)
+const int PIN_ANALOG_A1 = A1; // Shared: Joystick Y (Joystick LEDs, RGB)
+const int PIN_ANALOG_A2 = A2; // Bluetooth RX (Bluetooth Servo)
+const int PIN_ANALOG_A3 = A3; // Bluetooth TX (Bluetooth Servo)
+const int PIN_ANALOG_A4 = A4; // SDA for LCD (Wireless Notice Board)
+const int PIN_ANALOG_A5 = A5; // SCL for LCD (Wireless Notice Board)
+
+// Component Detection Pins
+const int DETECT_PINS[] = {
+  PIN_D2, PIN_D3, PIN_D4, PIN_D5, PIN_D6, PIN_D7, PIN_D8, PIN_D9, PIN_D10, PIN_D11, PIN_D12, PIN_D13
+};
+const int DETECT_PIN_COUNT = sizeof(DETECT_PINS) / sizeof(DETECT_PINS[0]);
+
+// Activity States
+enum Activity {
+  NONE,
+  BLUETOOTH_CONTROLLED_SERVO,
+  JOYSTICK_CONTROLLED_LEDS,
+  VISITOR_COUNTER,
+  CLAP_SWITCH,
+  WIRELESS_NOTICE_BOARD,
+  JOYSTICK_CONTROLLED_RGB,
+  SERVO_DISTANCE_INDICATOR
+};
+
+// Global Variables
+Activity currentActivity = NONE;
+bool activityLocked = false;
+
+// Timing Variables
+unsigned long lastDebounceTime = 0;
+const unsigned long DEBOUNCE_DELAY = 50;
+unsigned long lastActivityCheck = 0;
+const unsigned long ACTIVITY_CHECK_INTERVAL = 1000;
+
+// Error Handling
+bool errorState = false;
+unsigned long lastErrorBlink = 0;
+const unsigned long ERROR_BLINK_INTERVAL = 500;
+
+// Objects
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+Servo myServo;
+SoftwareSerial mySerial(PIN_ANALOG_A2, PIN_ANALOG_A3); // Bluetooth RX->A2, TX->A3
+LedControl dotMatrix = LedControl(PIN_D4, PIN_D2, PIN_D3, 1);
+
+// Activity-Specific Variables
+// Bluetooth Controlled Servo
+const int servoPin = PIN_D9;
+
+// Joystick Controlled LEDs
+const int SW_pin = PIN_D2;
+const int X_pin = PIN_ANALOG_A0;
+const int Y_pin = PIN_ANALOG_A1;
+#define LED_1 PIN_D3
+#define LED_2 PIN_D4
+#define LED_3 PIN_D5
+#define LED_4 PIN_D6
+const int ledPins[] = {LED_1, LED_2, LED_3, LED_4}; // D3, D4, D5, D6
+const int numLeds = 4;
+int currentLed = 0;
+unsigned long lastMove = 0;
+const int delayBetweenMoves = 200;
+unsigned long lastButtonPress = 0;
+
+
+// Visitor Counter
+static long duration, distance, maxDistance = 50, minDistance = 2;
+static int slowIn = 3, slowOut = 3;
+static byte countY = 0, countN = 0, people = 0;
+static unsigned long buzzerStart = 0, cooldownStart = 0;
+static enum State { EMPTY, OCCUPIED } state = EMPTY;
+
+const byte Number[21][8] PROGMEM = {
+  {0x00, 0x3C, 0x66, 0x6E, 0x76, 0x66, 0x66, 0x3C}, // 0
+  {0x00, 0x18, 0x18, 0x38, 0x18, 0x18, 0x18, 0x7E}, // 1
+  {0x00, 0x3C, 0x66, 0x06, 0x0C, 0x30, 0x60, 0x7E}, // 2
+  {0x00, 0x3C, 0x66, 0x06, 0x1C, 0x06, 0x66, 0x3C}, // 3
+  {0x00, 0x0C, 0x1C, 0x2C, 0x4C, 0x7E, 0x0C, 0x0C}, // 4
+  {0x00, 0x7E, 0x60, 0x7C, 0x06, 0x06, 0x66, 0x3C}, // 5
+  {0x00, 0x3C, 0x66, 0x60, 0x7C, 0x66, 0x66, 0x3C}, // 6
+  {0x00, 0x7E, 0x66, 0x0C, 0x0C, 0x18, 0x18, 0x18}, // 7
+  {0x00, 0x3C, 0x66, 0x66, 0x3C, 0x66, 0x66, 0x3C}, // 8
+  {0x00, 0x3C, 0x66, 0x66, 0x3E, 0x06, 0x66, 0x3C}, // 9
+  {0x00, 0x26, 0x69, 0x29, 0x29, 0x29, 0x76, 0x00}, // 10
+  {0x00, 0x22, 0x66, 0x22, 0x22, 0x22, 0x77, 0x00}, // 11
+  {0x00, 0x00, 0x27, 0x61, 0x27, 0x24, 0x77, 0x00}, // 12
+  {0x00, 0x00, 0x27, 0x61, 0x27, 0x21, 0x77, 0x00}, // 13
+  {0x00, 0x00, 0x28, 0x6A, 0x2E, 0x22, 0x72, 0x00}, // 14
+  {0x00, 0x00, 0x27, 0x64, 0x27, 0x21, 0x77, 0x00}, // 15
+  {0x00, 0x00, 0x27, 0x64, 0x27, 0x25, 0x77, 0x00}, // 16
+  {0x00, 0x00, 0x2E, 0x62, 0x22, 0x22, 0x72, 0x00}, // 17
+  {0x00, 0x00, 0x4E, 0xCA, 0x4E, 0x4A, 0xEE, 0x00}, // 18
+  {0x00, 0x00, 0x4E, 0xCA, 0x4E, 0x42, 0xEE, 0x00}, // 19
+  {0x00, 0x00, 0xEE, 0x2A, 0xEA, 0x8A, 0xEE, 0x00}  // 20
+};
+const byte smile[] PROGMEM = {0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C};
+const byte Soham[][8] PROGMEM = {
+  {0b00000000, 0b00111100, 0b01100110, 0b01100000, 0b00111100, 0b00000110, 0b01100110, 0b00111100}, // S
+  {0b00000000, 0b00111100, 0b01100110, 0b01100110, 0b01100110, 0b01100110, 0b01100110, 0b00111100}, // O
+  {0b00000000, 0b01100110, 0b01100110, 0b01100110, 0b01111110, 0b01100110, 0b01100110, 0b01100110}, // H
+  {0b00000000, 0b00111100, 0b01100110, 0b01100110, 0b01111110, 0b01100110, 0b01100110, 0b01100110}, // A
+  {0b00000000, 0b01100011, 0b01110111, 0b01111111, 0b01101011, 0b01100011, 0b01100011, 0b01100011}  // M
+};
+
+// Clap Switch
+const int soundSensorPin = PIN_ANALOG_A0;
+const int clapLedPin = PIN_D3;
+boolean LEDStatus = false;
+
+// Wireless Notice Board
+String val = "No Input";
+String oldval;
+String newval = "No Input";
+int i = 0;
+
+// Joystick Controlled RGB
+const int redPin = PIN_D4;
+const int greenPin = PIN_D6;
+const int bluePin = PIN_D5;
+const int xAxisPin = PIN_ANALOG_A0;
+const int yAxisPin = PIN_ANALOG_A1;
+const int buttonPin = PIN_D2;
+const int buzzerPin = PIN_D10;
+const int ledTypePin = PIN_D8;
+bool ledOn = false;
+String currentState = "Rest";
+bool isCommonCathode = true;
+
+// Servo Distance Indicator
+const int trigPin = PIN_D12;
+const int echoPin = PIN_D13;
+const int servoDistPin = PIN_D9;
+
+// Function Prototypes
+void detectComponents();
+void enterStandbyMode();
+void indicateError();
+bool checkPinActivity(int pin);
+bool i2cDetect();
+bool analogDetect(int pin);
+void runBluetoothControlledServo();
+void runJoystickControlledLeds();
+void runVisitorCounter();
+void runClapSwitch();
+void runWirelessNoticeBoard();
+void runJoystickControlledRgb();
+void runServoDistanceIndicator();
+void printByte(const byte* character);
+void showColor(int red, int green, int blue);
+void beepBuzzer(int beeps);
+void turnOffLed();
+
+// Execution Functions (Grouped Together)
+
+// Bluetooth Controlled Servo Pins:
+// rx = A2, tx = A3, servo = D9
+// Description: Controls a servo based on Bluetooth serial input (numeric angle 0-180 or range like 0-180).
+void runBluetoothControlledServo() {
+  static char inputBuffer[16];
+  static uint8_t bufferIndex = 0;
+  const uint8_t maxBuffer = 15;
+
+  if (mySerial.available()) {
+    char inChar = mySerial.read();
+    if (bufferIndex < maxBuffer) {
+      inputBuffer[bufferIndex++] = inChar;
+    }
+
+    if (inChar == '*' || inChar == '\n' || inChar == ' ' || bufferIndex >= maxBuffer) {
+      inputBuffer[bufferIndex - 1] = '\0';
+      if (bufferIndex > 1) {
+        Serial.print(F("Received: "));
+        Serial.println(inputBuffer);
+
+        char* dash = strchr(inputBuffer, '-');
+        if (dash && dash != inputBuffer) {
+          *dash = '\0';
+          int startPos = atoi(inputBuffer);
+          int endPos = atoi(dash + 1);
+          if (startPos >= 0 && endPos >= 0 && startPos <= 180 && endPos <= 180) {
+            int step = (endPos >= startPos) ? 1 : -1;
+            for (int pos = startPos; pos != endPos + step; pos += step) {
+              myServo.write(pos);
+              delay(30);
+              Serial.print(F("Angle: "));
+              Serial.print(pos);
+              Serial.println(F(" - Moved"));
+            }
+            Serial.print(F("Swept from "));
+            Serial.print(startPos);
+            Serial.print(F(" to "));
+            Serial.println(endPos);
+          } else {
+            Serial.println(F("Invalid range"));
+          }
+        } else {
+          int angle = atoi(inputBuffer);
+          if (angle >= 0 && angle <= 180) {
+            myServo.write(angle);
+            Serial.print(F("Angle: "));
+            Serial.print(angle);
+            Serial.println(F(" - Moved"));
+          } else {
+            Serial.println(F("Invalid angle"));
+          }
+        }
+      }
+
+      bufferIndex = 0;
+      memset(inputBuffer, 0, sizeof(inputBuffer));
+      while (mySerial.available()) mySerial.read();
+    }
+  }
+}
+
+// Joystick Controlled LEDs Pins:
+// sw = D2, xAxis = A0, yAxis = A1
+// led1 = D3, led2 = D4, led3 = D5, led4 = D6
+// Description: Controls four LEDs sequentially based on joystick position, with random blinking effect on button press.
+void runJoystickControlledLeds() {
+  // Handle joystick button press with debouncing
+  if (digitalRead(SW_pin) == LOW && millis() - lastButtonPress > DEBOUNCE_DELAY) {
+    Serial.println(F("Joystick button pressed - Random light effect"));
+    playRandomLight(5000); // Random LED blinking for 5 seconds
+    lightOnlyOneLed(currentLed); // Restore previous LED state
+    lastButtonPress = millis();
+    return;
+  }
+
+  int xValue = analogRead(X_pin);
+  int yValue = analogRead(Y_pin);
+
+  if (millis() - lastMove > delayBetweenMoves) {
+    // Y-axis (up/down)
+    if (yValue < 200) {
+      currentLed++;
+      if (currentLed >= numLeds) currentLed = numLeds - 1;
+      lightOnlyOneLed(currentLed);
+      lastMove = millis();
+      Serial.print(F("Moved to LED: "));
+      Serial.println(currentLed + 1);
+    } else if (yValue > 800) {
+      currentLed--;
+      if (currentLed < 0) currentLed = 0;
+      lightOnlyOneLed(currentLed);
+      lastMove = millis();
+      Serial.print(F("Moved to LED: "));
+      Serial.println(currentLed + 1);
+    }
+
+    // X-axis (left/right)
+    if (xValue > 800) {
+      currentLed += 2;
+      if (currentLed >= numLeds) currentLed = numLeds - 1;
+      lightOnlyOneLed(currentLed);
+      lastMove = millis();
+      Serial.print(F("Moved to LED: "));
+      Serial.println(currentLed + 1);
+    } else if (xValue < 200) {
+      currentLed -= 2;
+      if (currentLed < 0) currentLed = 0;
+      lightOnlyOneLed(currentLed);
+      lastMove = millis();
+      Serial.print(F("Moved to LED: "));
+      Serial.println(currentLed + 1);
+    }
+  }
+}
+
+// Visitor Counter USing Dot Matrix:
+// clk = D2, cs = D3, din = D8, buzzer = D6, trig = D12, echo = D13
+// Description: Counts visitors using an ultrasonic sensor, displays count on a dot matrix, with buzzer feedback.
+void runVisitorCounter() {
+  static LedControl dotMatrix(PIN_D4, PIN_D2, PIN_D3, 1);
+  static bool initialized = false;
+
+  // Initialize dot matrix once
+  if (!initialized) {
+    dotMatrix.shutdown(0, false);
+    dotMatrix.setIntensity(0, 15);
+    dotMatrix.clearDisplay(0);
+    printByte(Number[0]);
+    initialized = true;
+    Serial.println(F("Dot Matrix Counter initialized"));
+  }
+
+
+  // Non-blocking buzzer
+  if (buzzerStart && millis() - buzzerStart >= 400) {
+    digitalWrite(PIN_D6, LOW);
+    buzzerStart = 0;
+  }
+
+  // Cooldown check
+  if (cooldownStart && millis() - cooldownStart < 300) return;
+
+  // Ultrasonic sensor with timeout
+  long sum = 0;
+  for (byte i = 0; i < 3; i++) {
+    digitalWrite(PIN_D12, LOW);
+    delayMicroseconds(2);
+    digitalWrite(PIN_D12, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_D12, LOW);
+    sum += pulseIn(PIN_D13, HIGH, 30000);
+    delay(10);
+  }
+  distance = sum ? sum / 3 / 58 : 0;
+  Serial.print(F("Distance: "));
+  Serial.print(distance);
+  Serial.println(F(" cm"));
+
+  // State machine
+  switch (state) {
+    case EMPTY:
+      if (distance >= minDistance && distance < maxDistance) {
+        Serial.print(F("Distance <max: "));
+        Serial.println(distance);
+        if (++countY >= slowIn) {
+          state = OCCUPIED;
+          people = (people < 20) ? people + 1 : 0;
+          dotMatrix.clearDisplay(0);
+          printByte(Number[people]);
+          digitalWrite(PIN_D6, HIGH);
+          buzzerStart = millis();
+          cooldownStart = millis();
+          countY = countN = 0;
+          Serial.print(F("Count: "));
+          Serial.println(people);
+        }
+      } else {
+        countY = 0;
+      }
+      break;
+    case OCCUPIED:
+      if (distance >= maxDistance || distance == 0) {
+        Serial.print(F("Distance >Max or =0: "));
+        Serial.println(distance);
+        if (++countN >= slowOut) {
+          state = EMPTY;
+          countY = countN = 0;
+        }
+      } else {
+        countN = 0;
+      }
+      if (distance == 0) Serial.println(F("No echo"));
+      break;
+  }
+}
+
+
+
+// Clap Switch Pins:
+// soundSensor = A0, led = D12
+// Description: Toggles an LED on/off based on sound sensor input (clap detection), with serial output.
+void runClapSwitch() {
+  int sensorData = digitalRead(soundSensorPin);
+
+  if (sensorData == HIGH && millis() - lastDebounceTime > DEBOUNCE_DELAY) {
+    LEDStatus = !LEDStatus;
+    digitalWrite(clapLedPin, LEDStatus ? HIGH : LOW);
+    lastDebounceTime = millis();
+    Serial.print(F("Clap detected! LED Status: "));
+    Serial.println(LEDStatus ? "ON" : "OFF");
+  }
+}
+
+// Wireless Notice Board Pins:
+// rx = D0, tx = D1, sda = A4, scl = A5
+// Description: Displays scrolling text on an LCD received via Bluetooth serial input.
+void runWirelessNoticeBoard() {
+  SoftwareSerial noticeSerial(PIN_D0, PIN_D1);
+  noticeSerial.begin(9600);
+  val = noticeSerial.readString();
+  val.trim();
+  Serial.println(val);
+  if (val != oldval) {
+    newval = val;
+  }
+  lcd.clear();
+  lcd.setCursor(i, 0);
+  lcd.print(newval);
+  i++;
+  if (i >= 15) {
+    i = 0;
+  }
+  val = oldval;
+}
+
+// Joystick Controlled RGB Pins:
+// red = D4, green = D6, blue = D5, xAxis = A0, yAxis = A1, button = D2, buzzer = D10, ledType = D8
+// Description: Controls RGB LED colors based on joystick position, with buzzer feedback and button to turn off.
+void runJoystickControlledRgb() {
+
+  int xAxisValue = analogRead(xAxisPin);
+  int yAxisValue = analogRead(yAxisPin);
+
+  Serial.print(F("X: "));
+  Serial.print(xAxisValue);
+  Serial.print(F(" Y: "));
+  Serial.println(yAxisValue);
+
+  String newState = "Rest";
+  if (yAxisValue <= 100) {
+    newState = "Red";
+  } else if (yAxisValue >= 900) {
+    newState = "Green";
+  } else if (xAxisValue >= 900) {
+    newState = "Yellow";
+  } else if (xAxisValue <= 100) {
+    newState = "Blue";
+  }
+
+  if (newState != currentState) {
+    Serial.println("State changed to: " + newState);
+    currentState = newState;
+
+    if (newState == "Red") {
+      showColor(255, 0, 0);
+      beepBuzzer(1);
+    } else if (newState == "Green") {
+      showColor(0, 255, 0);
+      beepBuzzer(3);
+    } else if (newState == "Yellow") {
+      showColor(255, 255, 0);
+      beepBuzzer(4);
+    } else if (newState == "Blue") {
+      showColor(0, 0, 255);
+      beepBuzzer(2);
+    } else {
+      delay(100);
+    }
+  }
+}
+
+// Servo Distance Indicator Pins:
+// trig = D12, echo = D13, servo = D9
+// Description: Moves a servo based on ultrasonic distance, with serial output.
+void runServoDistanceIndicator() {
+  long duration, distance;
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  Serial.print(F("Servo-Distance: "));
+  Serial.print(distance);
+  Serial.println(F(" cm"));
+  int angle = 180 - map(constrain(distance, 0, 30), 0, 30, 0, 180);
+  myServo.write(angle);
+  delay(500);
+}
+
+// Helper Functions
+void printByte(const byte* character) {
+  for (byte i = 0; i < 8; i++) {
+    dotMatrix.setRow(0, i, pgm_read_byte(&character[i]));
+  }
+}
+
+void showColor(int red, int green, int blue) {
+  if (isCommonCathode) {
+    analogWrite(redPin, red);
+    analogWrite(greenPin, green);
+    analogWrite(bluePin, blue);
+  } else {
+    analogWrite(redPin, 255 - red);
+    analogWrite(greenPin, 255 - green);
+    analogWrite(bluePin, 255 - blue);
+  }
+  ledOn = true;
+  delay(500);
+}
+
+void beepBuzzer(int beeps) {
+  Serial.print(F("Beeping "));
+  Serial.print(beeps);
+  Serial.println(F(" times"));
+  for (int i = 0; i < beeps; i++) {
+    tone(buzzerPin, 1000, 100);
+    delay(200);
+  }
+}
+
+void turnOffLed() {
+  analogWrite(redPin, isCommonCathode ? 0 : 255);
+  analogWrite(greenPin, isCommonCathode ? 0 : 255);
+  analogWrite(bluePin, isCommonCathode ? 0 : 255);
+  ledOn = false;
+  currentState = "Rest";
+  delay(100);
+}
+
+void lightOnlyOneLed(int index) {
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(ledPins[i], i == index ? HIGH : LOW);
+  }
+}
+
+void playRandomLight(unsigned long duration) {
+  unsigned long startTime = millis();
+  while (millis() - startTime < duration) {
+    int led = random(0, numLeds);       // Choose random LED
+    int state = random(0, 2);           // Randomly turn ON or OFF
+    digitalWrite(ledPins[led], state);
+    delay(100);                         // Quick change
+  }
+
+  // Turn all LEDs off after effect
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+
+bool i2cDetect() {
+  Wire.begin();
+  byte error, address;
+  for (address = 1; address < 127; address++) {
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+    if (error == 0) {
+      if (address == 0x27 || address == 0x3F) return true;
+    }
+  }
+  return false;
+}
+
+bool analogDetect(int pin) {
+  const int samples = 5;
+  const int iterations = 2;
+  int iter = 0;
+  while (iter < iterations) {
+    long sumReadings = 0;
+    for (int i = 0; i < samples; i++) {
+      sumReadings += analogRead(pin);
+      delay(10);
+    }
+    int avgValue = sumReadings / samples;
+    Serial.print(F("Iteration "));
+    Serial.print(iter + 1);
+    Serial.print(F(" | Analog Value: "));
+    Serial.println(avgValue);
+    if (avgValue >= 50 && avgValue <= 1000) {
+      iter++;
+      if (iter >= iterations) return true;
+    } else {
+      return false;
+    }
+    delay(100);
+  }
+  Serial.println(F("Analog NOT Detected"));
+  return false;
+}
+
+bool checkPinActivity(int pin) {
+  return digitalRead(pin) == LOW;
+}
+
+void enterStandbyMode() {
+  static unsigned long lastBlink = 0;
+  if (millis() - lastBlink >= ERROR_BLINK_INTERVAL) {
+    digitalWrite(PIN_D13, !digitalRead(PIN_D13));
+    lastBlink = millis();
+  }
+}
+
+void indicateError() {
+  if (millis() - lastErrorBlink >= ERROR_BLINK_INTERVAL) {
+    digitalWrite(PIN_D13, !digitalRead(PIN_D13));
+    Serial.println(F("Error: Component disconnected"));
+    lastErrorBlink = millis();
+  }
+}
+
+void detectComponents() {
+  if (activityLocked) return;
+  Serial.println(F("Detecting components..."));
+  // Bluetooth Controlled Servo Detection
+  // Requires: Bluetooth (A2, A3), servo (D9), state=D7
+  if (checkPinActivity(PIN_D7) && !i2cDetect()) {
+    currentActivity = BLUETOOTH_CONTROLLED_SERVO;
+    pinMode(PIN_D9, OUTPUT);
+    myServo.attach(PIN_D9);
+    myServo.write(90);
+    Serial.println(F("Activity: Bluetooth Controlled Servo Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Joystick Controlled LEDs Detection
+  // Requires: Joystick (A0, A1, D2), LEDs (D3-D6)
+  else if (checkPinActivity(PIN_D3) && checkPinActivity(PIN_D4) &&
+           checkPinActivity(PIN_D5) && checkPinActivity(PIN_D6)) {
+    currentActivity = JOYSTICK_CONTROLLED_LEDS;
+    for (int i = 0; i < numLeds; i++) {
+       pinMode(ledPins[i], OUTPUT);
+     }
+    pinMode(SW_pin, INPUT_PULLUP);
+    pinMode(X_pin, INPUT);
+    pinMode(Y_pin, INPUT);
+    randomSeed(analogRead(0)); // Seed random with floating analog pin
+    lightOnlyOneLed(currentLed);
+    Serial.println(F("Activity: Joystick Controlled LEDs Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Visitor Counter Detection
+  // Requires: Dot Matrix (D2, D3, D4), buzzer (D6), ultrasonic (D12, D13)
+  else if (checkPinActivity(PIN_D6) && checkPinActivity(PIN_D13)) {
+    currentActivity = VISITOR_COUNTER;
+    pinMode(PIN_D12, OUTPUT);
+    pinMode(PIN_D13, INPUT);
+    pinMode(PIN_D6, OUTPUT);
+    digitalWrite(PIN_D6,LOW);
+    LedControl dotMatrix(PIN_D4, PIN_D2, PIN_D3, 1);
+    dotMatrix.shutdown(0, false);
+    dotMatrix.setIntensity(0, 15);
+    dotMatrix.clearDisplay(0);
+    for (byte count = 0; count <= 4; count++) {
+      printByte(Soham[count]);
+      delay(500);
+    }
+    printByte(smile);
+    delay(500);
+    dotMatrix.clearDisplay(0);
+    printByte(Number[0]);
+    Serial.println(F("Activity: Visitor Counter Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Clap Switch Detection
+  // Requires: Sound sensor (A0), LED (D3)
+  else if ( checkPinActivity(PIN_D3) && !checkPinActivity(PIN_D4) &&
+            !checkPinActivity(PIN_D5) && !checkPinActivity(PIN_D6)) {
+    currentActivity = CLAP_SWITCH;
+    pinMode(soundSensorPin, INPUT);
+    pinMode(clapLedPin, OUTPUT);
+    digitalWrite(clapLedPin, LOW);
+    Serial.println(F("Activity: Clap Switch Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Wireless Notice Board Detection
+  // Requires: LCD (A4, A5), Bluetooth (D0, D1), State=D8
+  else if (checkPinActivity(PIN_D8) && i2cDetect()) {
+    currentActivity = WIRELESS_NOTICE_BOARD;
+    lcd.begin();
+    lcd.setCursor(0, 0);
+    lcd.print(F("Wireless Notice"));
+    lcd.setCursor(0, 1);
+    lcd.print(F("     Board     "));
+    delay(3000);
+    lcd.clear();
+    lcd.print(F("Welcome!"));
+    Serial.println(F("Activity: Wireless Notice Board Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Joystick Controlled RGB Detection
+  // Requires: Joystick (A0, A1, D2), RGB (D4, D5, D6), buzzer (D10), ledType (D8)
+  else if (checkPinActivity(PIN_D10)) {
+    currentActivity = JOYSTICK_CONTROLLED_RGB;
+    pinMode(redPin, OUTPUT);
+    pinMode(greenPin, OUTPUT);
+    pinMode(bluePin, OUTPUT);
+    pinMode(buzzerPin, OUTPUT);
+    digitalWrite(buzzerPin,LOW);
+    pinMode(buttonPin, INPUT_PULLUP);
+    pinMode(ledTypePin, INPUT_PULLUP);
+    isCommonCathode = (digitalRead(ledTypePin) == LOW);
+    showColor(255, 0, 0);
+    delay(1500);
+    turnOffLed();
+    attachInterrupt(digitalPinToInterrupt(buttonPin), turnOffLed, FALLING);
+    Serial.println(F("Activity: Joystick Controlled RGB Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Servo Distance Indicator Detection
+  // Requires: Ultrasonic (D12, D13), servo (D9)
+  else if (checkPinActivity(PIN_D13) && !checkPinActivity(PIN_D6) && !i2cDetect()) {
+    currentActivity = SERVO_DISTANCE_INDICATOR;
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+    pinMode(servoDistPin, OUTPUT);
+    myServo.attach(servoDistPin);
+    myServo.write(0);
+    Serial.println(F("Activity: Servo Distance Indicator Detected - Running"));
+    activityLocked = true;
+  }
+
+  // No Activity Detected
+  else {
+    currentActivity = NONE;
+    Serial.println(F("No valid components detected - Entering standby mode"));
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  mySerial.begin(9600);
+  for (int i = 0; i < DETECT_PIN_COUNT; i++) {
+    pinMode(DETECT_PINS[i], INPUT_PULLUP);
+  }
+  Wire.begin();
+  detectComponents();
+}
+
+void loop() {
+  if (errorState) {
+    indicateError();
+    return;
+  }
+  if (!activityLocked) {
+    if (millis() - lastActivityCheck >= ACTIVITY_CHECK_INTERVAL) {
+      detectComponents();
+      lastActivityCheck = millis();
+    }
+  }
+
+  switch (currentActivity) {
+    case BLUETOOTH_CONTROLLED_SERVO: runBluetoothControlledServo(); break;
+    case JOYSTICK_CONTROLLED_LEDS: runJoystickControlledLeds(); break;
+    case VISITOR_COUNTER: runVisitorCounter(); break;
+    case CLAP_SWITCH: runClapSwitch(); break;
+    case WIRELESS_NOTICE_BOARD: runWirelessNoticeBoard(); break;
+    case JOYSTICK_CONTROLLED_RGB: runJoystickControlledRgb(); break;
+    case SERVO_DISTANCE_INDICATOR: runServoDistanceIndicator(); break;
+    case NONE: enterStandbyMode(); break;
+  }
+}`,
+                    zipUrl: "https://drive.google.com/file/d/13SjZ2Ef8diYu55BXPLS0t3Rt424KMTwZ/preview",
+                    zipFilename: "silver-challenge-code.zip"
+                }
+            },
+            gold: {
+                pdf: {
+                    title: "Gold Challenge PDF",
+                    url: "https://drive.google.com/file/d/1ndg0r1SdiwzTQAuQbe8_9dXph675hESF/preview",
+                    filename: "gold-challenge.pdf"
+                },
+                code: {
+                    title: "Gold Challenge Code",
+                    content: `/*********************************************************
+Project Title: Unified Code for Multiple Activities
+Organisation: Soham Academy Of Human Excellence & Texoham Centre For Advanced Computing
+Websites: https://ria.sohamacademy.org/, https://www.texoham.ai
+*********************************************************/
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Servo.h>
+#include <SoftwareSerial.h>
+#include <TM1637Display.h>
+#include <Keypad.h>
+#include <EEPROM.h>
+
+// Shared Pins
+const int PIN_D0 = 0;   // Reserved (Serial RX)
+const int PIN_D1 = 1;   // Reserved (Serial TX)
+const int PIN_D2 = 2;   // Shared (Liquid Level CLK, Bluetooth RX, Encoder CLK)
+const int PIN_D3 = 3;   // Shared (Collision LED1, Liquid Level DIO, Keypad row1, Encoder DT)
+const int PIN_D4 = 4;   // Shared (Collision LED2, Keypad row2, Encoder SW)
+const int PIN_D5 = 5;   // Shared (Collision LED3, Keypad row3)
+const int PIN_D6 = 6;   // Shared (Collision LED4, Keypad row4)
+const int PIN_D7 = 7;   // Shared (Collision LED5, Keypad col1, Rain Alert LED)
+const int PIN_D8 = 8;   // Shared (Keypad col2, Rain Alert buzzer, Motor IN1, Bluetooth jumper)
+const int PIN_D9 = 9;   // Shared (Collision buzzer, Keypad col3, Motor IN2, Keypad servo, Gesture servo)
+const int PIN_D10 = 10; // Shared (Keypad col4, Motor PWM, Bluetooth green)
+const int PIN_D11 = 11; // Shared (Liquid Level echo, Bluetooth blue, Bluetooth state)
+const int PIN_D12 = 12; // Shared (Collision trig, Liquid Level trig, Keypad LED)
+const int PIN_D13 = 13; // Shared (Collision echo, Liquid Level echo)
+const int PIN_ANALOG_A0 = A0; // Rain Alert sensor
+const int PIN_ANALOG_A4 = A4; // SDA for LCD
+const int PIN_ANALOG_A5 = A5; // SCL for LCD
+
+// Component Detection Pins
+const int DETECT_PINS[] = {
+  PIN_D2, PIN_D3, PIN_D4, PIN_D5, PIN_D6, PIN_D7, PIN_D8, PIN_D9, PIN_D10, PIN_D11, PIN_D12, PIN_D13
+};
+const int DETECT_PIN_COUNT = sizeof(DETECT_PINS) / sizeof(DETECT_PINS[0]);
+
+// Activity States
+enum Activity {
+  NONE,
+  COLLISION_DETECTION,
+  LIQUID_LEVEL_MONITORING,
+  RAIN_ALERT_SYSTEM,
+  KEYPAD_LOCK_SYSTEM,
+  GESTURE_CONTROLLED_SERVO,
+  BLUETOOTH_CONTROLLED_RGB,
+  ROTARY_ENCODER_MOTOR
+};
+
+// Global Variables
+Activity currentActivity = NONE;
+bool activityLocked = false;
+
+// Timing Variables
+unsigned long lastDebounceTime = 0;
+const unsigned long DEBOUNCE_DELAY = 50;
+unsigned long lastActivityCheck = 0;
+const unsigned long ACTIVITY_CHECK_INTERVAL = 1000;
+
+// Error Handling
+bool errorState = false;
+unsigned long lastErrorBlink = 0;
+const unsigned long ERROR_BLINK_INTERVAL = 500;
+
+// Objects
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+Servo myServo;
+SoftwareSerial BTSerial(PIN_D0, PIN_D1); // RX=D0, TX=D1 for Bluetooth
+TM1637Display display(PIN_D3, PIN_D2); // CLK=D3, DIO=D2 for Liquid Level
+
+
+// Keypad Setup
+char keymap[4][4] = {
+  {'1', '2', '3', 'A'},
+  {'4', '5', '6', 'B'},
+  {'7', '8', '9', 'C'},
+  {'*', '0', '#', 'D'}
+};
+byte rowPins[4] = {PIN_D3, PIN_D4, PIN_D5, PIN_D6};
+byte colPins[4] = {PIN_D7, PIN_D8, PIN_D9, PIN_D10};
+Keypad myKeypad = Keypad(makeKeymap(keymap), rowPins, colPins, 4, 4);
+
+// Activity-Specific Variables
+// Collision Detection
+const int collisionTrigPin = PIN_D12;
+const int collisionEchoPin = PIN_D13;
+const int collisionLedPins[] = {PIN_D3, PIN_D4, PIN_D5, PIN_D6, PIN_D7};
+const int collisionBuzzerPin = PIN_D9;
+const int collisionLedCount = 5;
+
+// Liquid Level Monitoring
+const int liquidTrigPin = PIN_D12;
+const int liquidEchoPin = PIN_D13; // Updated from D11 to D13
+const int liquidGreenLed = PIN_D5; 
+const int liquidRedLed = PIN_D6;   
+
+// Rain Alert System
+const int rainSensorPin = PIN_ANALOG_A0;
+const int rainLedPin = PIN_D7;
+const int rainBuzzerPin = PIN_D8;
+const int rainThreshold = 600;
+
+// Keypad Lock System
+const int keypadLedPin = PIN_D12;
+const int keypadServoPin = PIN_D9; // Updated from D11 to D9
+char keypadCode[] = {'1', '5', '4', '8'};
+char keypadCheck1[sizeof(keypadCode)];
+char keypadCheck2[sizeof(keypadCode)];
+byte keypadA = 0, keypadI = 0, keypadS = 0, keypadJ = 0;
+char sharedBuffer[20];
+const char MSG_ENTER_CODE[] PROGMEM = "ENTER THE CODE";
+const char MSG_DOOR[] PROGMEM = "TO / (Door)!!";
+const char MSG_INCORRECT[] PROGMEM = "CODE INCORRECT";
+const char MSG_GET_AWAY[] PROGMEM = "GET AWAY!!!";
+const char MSG_CHANGING[] PROGMEM = "Changing code";
+const char MSG_OLD_CODE[] PROGMEM = "Enter old code";
+const char MSG_NEW_CODE[] PROGMEM = "Enter new code";
+const char MSG_PRESS_A[] PROGMEM = "and press A";
+const char MSG_CONFIRM[] PROGMEM = "Confirm code";
+const char MSG_CHANGED[] PROGMEM = "Code Changed";
+const char MSG_NOT_MATCH[] PROGMEM = "Codes are not matching !!";
+const char MSG_WRONG[] PROGMEM = "Wrong";
+const char MSG_ACCESS[] PROGMEM = "Access Granted";
+const char MSG_WELCOME[] PROGMEM = "WELCOME!!";
+
+// Gesture Controlled Servo
+#define accel_module (0x53)
+byte accelValues[6];
+double gestureTheta = 0;
+int gestureIndexMax = 4;
+int gestureIndex = 0;
+double gestureIndexTheta[4] = {0, 0, 0, 0};
+double gestureSumTheta = 0;
+int gesturePos = 0;
+const int gestureServoPin = PIN_D9; // Updated from D11 to D9
+uint8_t adxlAddress; // Global variable to store the ADXL345 address
+
+// Bluetooth Controlled RGB
+const int rgbRedPin = PIN_D9;
+const int rgbGreenPin = PIN_D10;
+const int rgbBluePin = PIN_D11;
+const int rgbJumperPin = PIN_D8;
+bool isCommonCathode = false;
+const int rgbStatePin = PIN_D11; // Updated from unspecified to D11
+
+// Rotary Encoder Motor
+const int encoderCLK = PIN_D2;
+const int encoderDT = PIN_D3;
+const int encoderSW = PIN_D4;
+const int motorIN1 = PIN_D8;
+const int motorIN2 = PIN_D9;
+const int motorPWM = PIN_D10;
+volatile int encoderPos = 0;
+unsigned long lastButtonPress = 0;
+const int maxPos = 25;
+
+// Function Prototypes
+void detectComponents();
+void enterStandbyMode();
+void indicateError();
+bool checkPinActivity(int pin);
+bool i2cDetect();
+bool analogDetect(int pin);
+bool detectUltrasonic(int trigPin, int echoPin);
+void runCollisionDetection();
+void runLiquidLevelMonitoring();
+void runRainAlertSystem();
+void runKeypadLockSystem();
+void runGestureControlledServo();
+void runBluetoothControlledRGB();
+void runRotaryEncoderMotor();
+void readEncoder();
+void initLCD();
+void displayMessage(const char* msg, int row = 0, int col = 0);
+void ReadCode(Keypad& myKeypad, char& keypressed, char* code, char* check, byte& a, byte& i, byte& j);
+void ChangeCode(Keypad& myKeypad, char* code, char* check1, char* check2, byte& a, byte& i, byte& s);
+void GetNewCode1(Keypad& myKeypad, char* check, byte& i, byte& j);
+void GetNewCode2(Keypad& myKeypad, char* check, byte& i, byte& j);
+void OpenDoor(Servo& myServo);
+void initializeAccelChip();
+void readAccelI2C();
+
+// Execution Functions (Grouped Together)
+
+// Collision Detection Pins:
+// trig = D12, echo = D13, LEDs = D3-D7, buzzer = D9
+// Description: Activates LEDs and buzzer based on ultrasonic distance for collision warning.
+void runCollisionDetection() {
+  digitalWrite(collisionTrigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(collisionTrigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(collisionTrigPin, LOW);
+  long duration = pulseIn(collisionEchoPin, HIGH);
+  int distance = duration / 58.2;
+
+  if (distance <= 7) {
+    digitalWrite(collisionLedPins[0], HIGH);
+    digitalWrite(collisionBuzzerPin, HIGH);
+  } else {
+    digitalWrite(collisionLedPins[0], LOW);
+    digitalWrite(collisionBuzzerPin, LOW);
+  }
+  if (distance <= 14) digitalWrite(collisionLedPins[1], HIGH); else digitalWrite(collisionLedPins[1], LOW);
+  if (distance <= 21) digitalWrite(collisionLedPins[2], HIGH); else digitalWrite(collisionLedPins[2], LOW);
+  if (distance <= 28) digitalWrite(collisionLedPins[3], HIGH); else digitalWrite(collisionLedPins[3], LOW);
+  if (distance <= 35) digitalWrite(collisionLedPins[4], HIGH); else digitalWrite(collisionLedPins[4], LOW);
+
+  Serial.print(F("Collision Distance: "));
+  Serial.print(distance);
+  Serial.println(F(" cm"));
+  delay(100);
+}
+
+// Liquid Level Monitoring Pins:
+// trig = D12, echo = D13, CLK = D2, DIO = D3, green LED = D3, red LED = D4
+// Description: Displays liquid level on a 4-digit display and controls LEDs based on ultrasonic distance.
+void runLiquidLevelMonitoring() {
+  digitalWrite(liquidTrigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(liquidTrigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(liquidTrigPin, LOW);
+  long duration = pulseIn(liquidEchoPin, HIGH);
+  int distance = duration * 0.034 / 2;
+
+  display.showNumberDec(distance);
+
+  if (distance <= 15) {
+    digitalWrite(liquidGreenLed, HIGH);
+    digitalWrite(liquidRedLed, LOW);
+  } else if (distance > 15 && distance <= 40) {
+    digitalWrite(liquidGreenLed, LOW);
+    digitalWrite(liquidRedLed, HIGH);
+  } else {
+    digitalWrite(liquidGreenLed, LOW);
+    digitalWrite(liquidRedLed, LOW);
+  }
+
+  Serial.print(F("Liquid Level: "));
+  Serial.print(distance);
+  Serial.println(F(" cm"));
+  delay(500);
+}
+
+// Rain Alert System Pins:
+// sensor = A0, LED = D7, buzzer = D8
+// Description: Monitors rain sensor and activates LED and buzzer when rain is detected.
+void runRainAlertSystem() {
+  int rainValue = analogRead(rainSensorPin);
+  if (rainValue < rainThreshold) {
+    digitalWrite(rainLedPin, HIGH);
+    digitalWrite(rainBuzzerPin, HIGH);
+    Serial.println(F("Rain detected!"));
+  } else {
+    digitalWrite(rainLedPin, LOW);
+    digitalWrite(rainBuzzerPin, LOW);
+    Serial.println(F("No rain."));
+  }
+  Serial.print(F("Rain Sensor Value: "));
+  Serial.println(rainValue);
+  delay(2000);
+}
+
+// Keypad Lock System Pins:
+// row1-4 = D3-D6, col1-4 = D7-D10, servo = D11, LED = D12, SDA = A4, SCL = A5
+// Description: Unlocks a servo-controlled door with a keypad password, with LCD feedback.
+void runKeypadLockSystem() {
+  char keypressed = myKeypad.getKey();
+  if (keypressed == '*') {
+    lcd.clear();
+    displayMessage(MSG_ENTER_CODE);
+    ReadCode(myKeypad, keypressed, keypadCode, keypadCheck1, keypadA, keypadI, keypadJ);
+    if (keypadA == sizeof(keypadCode)) {
+      OpenDoor(myServo);
+    } else {
+      lcd.clear();
+      displayMessage(MSG_INCORRECT, 0, 1);
+      displayMessage(MSG_GET_AWAY, 1, 4);
+      for (byte blink = 0; blink < 5; blink++) {
+        digitalWrite(keypadLedPin, HIGH);
+        delay(500);
+        digitalWrite(keypadLedPin, LOW);
+        delay(500);
+      }
+    }
+    delay(2000);
+    lcd.clear();
+    displayMessage(MSG_ENTER_CODE);
+    displayMessage(MSG_DOOR, 1, 1);
+  }
+  if (keypressed == '#') {
+    ChangeCode(myKeypad, keypadCode, keypadCheck1, keypadCheck2, keypadA, keypadI, keypadS);
+    lcd.clear();
+    displayMessage(MSG_ENTER_CODE);
+    displayMessage(MSG_DOOR, 1, 1);
+  }
+}
+
+// Gesture Controlled Servo Pins:
+// accel = I2C (0x53), servo = D9
+// Description: Controls a servo based on accelerometer tilt angle.
+void runGestureControlledServo() {
+  myServo.attach(gestureServoPin);
+  for (gestureIndex = 0; gestureIndex <= gestureIndexMax; gestureIndex++) {
+    readAccelI2C();
+    gestureIndexTheta[gestureIndex] = gestureTheta;
+    gestureSumTheta += gestureIndexTheta[gestureIndex];
+    gestureIndex++;
+    if (gestureIndex > gestureIndexMax) {
+      gestureIndex = 0;
+    }
+  }
+  gestureSumTheta = gestureSumTheta * 57.3 / gestureIndexMax;
+  gesturePos = gestureSumTheta;
+  gesturePos = map(gesturePos, -90, 90, 0, 179);
+  gesturePos = constrain(gesturePos, 0, 179);
+  myServo.write(gesturePos);
+  gestureSumTheta = 0;
+  delay(15);
+}
+
+// Bluetooth Controlled RGB Pins:
+// RX = D2, TX = D3, red = D9, green = D10, blue = D11, jumper = D8, state = D11
+// Description: Controls an RGB LED via Bluetooth commands.
+void runBluetoothControlledRGB() {
+  if (BTSerial.available()) {
+    String data = BTSerial.readStringUntil('\n');
+    data.trim();
+    Serial.print(F("Received: "));
+    Serial.println(data);
+
+    if (data.equalsIgnoreCase("TEST")) {
+      int off = isCommonCathode ? 0 : 255;
+      int on = isCommonCathode ? 255 : 0;
+      analogWrite(rgbRedPin, on);
+      analogWrite(rgbGreenPin, off);
+      analogWrite(rgbBluePin, off);
+      Serial.println(F("Executed: Red ON"));
+      delay(2000);
+      analogWrite(rgbRedPin, off);
+      analogWrite(rgbGreenPin, on);
+      analogWrite(rgbBluePin, off);
+      Serial.println(F("Executed: Green ON"));
+      delay(2000);
+      analogWrite(rgbRedPin, off);
+      analogWrite(rgbGreenPin, off);
+      analogWrite(rgbBluePin, on);
+      Serial.println(F("Executed: Blue ON"));
+      delay(2000);
+      analogWrite(rgbRedPin, off);
+      analogWrite(rgbGreenPin, off);
+      analogWrite(rgbBluePin, off);
+      Serial.println(F("Executed: LED OFF"));
+      return;
+    }
+
+    int r = 0, g = 0, b = 0;
+    bool valid = false;
+    if (sscanf(data.c_str(), "%d,%d,%d", &r, &g, &b) == 3) {
+      valid = true;
+    } else {
+      String rStr, gStr, bStr;
+      int pos = 0;
+      if (data.startsWith("R")) {
+        pos = 1;
+        while (pos < data.length() && isDigit(data[pos])) {
+          rStr += data[pos++];
+        }
+        if (pos < data.length() && data[pos] == 'G') {
+          pos++;
+          while (pos < data.length() && isDigit(data[pos])) {
+            gStr += data[pos++];
+          }
+          if (pos < data.length() && data[pos] == 'B') {
+            pos++;
+            while (pos < data.length() && isDigit(data[pos])) {
+              bStr += data[pos++];
+            }
+            r = rStr.toInt();
+            g = gStr.toInt();
+            b = bStr.toInt();
+            valid = true;
+          }
+        }
+      }
+    }
+
+    if (valid) {
+      r = constrain(r, 0, 255);
+      g = constrain(g, 0, 255);
+      b = constrain(b, 0, 255);
+      int r_out = isCommonCathode ? r : 255 - r;
+      int g_out = isCommonCathode ? g : 255 - g;
+      int b_out = isCommonCathode ? b : 255 - b;
+      analogWrite(rgbRedPin, r_out);
+      analogWrite(rgbGreenPin, g_out);
+      analogWrite(rgbBluePin, b_out);
+      Serial.print(F("Executed: RGB ("));
+      Serial.print(r_out);
+      Serial.print(F(","));
+      Serial.print(g_out);
+      Serial.print(F(","));
+      Serial.print(b_out);
+      Serial.println(F(")"));
+    } else {
+      Serial.println(F("Executed: Invalid command"));
+    }
+    delay(20);
+    while (BTSerial.available()) BTSerial.read();
+  }
+}
+
+// Rotary Encoder Motor Pins:
+// CLK = D2, DT = D3, SW = D4, IN1 = D8, IN2 = D9, PWM = D10
+// Description: Controls DC motor speed and direction with a rotary encoder.
+void runRotaryEncoderMotor() {
+  if (digitalRead(encoderSW) == LOW && millis() - lastButtonPress > DEBOUNCE_DELAY) {
+    encoderPos = 0;
+    lastButtonPress = millis();
+    Serial.println(F("Encoder Reset"));
+  }
+
+  int pwmVal = map(abs(encoderPos), 0, maxPos, 0, 255);
+  if (encoderPos > 0) {
+    digitalWrite(motorIN1, HIGH);
+    digitalWrite(motorIN2, LOW);
+    analogWrite(motorPWM, pwmVal);
+  } else if (encoderPos < 0) {
+    digitalWrite(motorIN1, LOW);
+    digitalWrite(motorIN2, HIGH);
+    analogWrite(motorPWM, pwmVal);
+  } else {
+    digitalWrite(motorIN1, LOW);
+    digitalWrite(motorIN2, LOW);
+    analogWrite(motorPWM, 0);
+  }
+
+  static unsigned long lastPrint = 0;
+  if (millis() - lastPrint >= 500) {
+    Serial.print(F("Encoder Pos: "));
+    Serial.println(encoderPos);
+    lastPrint = millis();
+  }
+  delay(5);
+}
+
+// Helper Functions
+void readEncoder() {
+  static int lastCLKState = HIGH;
+  int clkState = digitalRead(encoderCLK);
+  int dtState = digitalRead(encoderDT);
+  if (clkState != lastCLKState) {
+    if (dtState != clkState) {
+      encoderPos = min(encoderPos + 1, maxPos);
+    } else {
+      encoderPos = max(encoderPos - 1, -maxPos);
+    }
+  }
+  lastCLKState = clkState;
+}
+
+void initLCD() {
+  lcd.begin();
+  lcd.backlight();
+}
+
+void displayMessage(const char* msg, int row, int col) {
+  strcpy_P(sharedBuffer, msg);
+  lcd.setCursor(col, row);
+  lcd.print(sharedBuffer);
+}
+
+void ReadCode(Keypad& myKeypad, char& keypressed, char* code, char* check, byte& a, byte& i, byte& j) {
+  i = 0; a = 0; j = 0;
+  while (keypressed != 'A') {
+    keypressed = myKeypad.getKey();
+    if (keypressed != NO_KEY && keypressed != 'A') {
+      lcd.setCursor(j, 1);
+      lcd.print(F("*"));
+      j++;
+      if (keypressed == code[i] && i < 4) {
+        a++;
+        i++;
+      } else {
+        a--;
+      }
+    }
+  }
+  keypressed = NO_KEY;
+}
+
+void ChangeCode(Keypad& myKeypad, char* code, char* check1, char* check2, byte& a, byte& i, byte& s) {
+  lcd.clear();
+  displayMessage(MSG_CHANGING);
+  delay(1000);
+  lcd.clear();
+  displayMessage(MSG_OLD_CODE);
+  ReadCode(myKeypad, code[0], code, check1, a, i, s);
+  if (a == 4) {
+    lcd.clear();
+    displayMessage(MSG_CHANGING);
+    GetNewCode1(myKeypad, check1, i, s);
+    GetNewCode2(myKeypad, check2, i, s);
+    s = 0;
+    for (i = 0; i < 4; i++) {
+      if (check1[i] == check2[i]) s++;
+    }
+    if (s == 4) {
+      for (i = 0; i < 4; i++) {
+        code[i] = check2[i];
+        EEPROM.put(i, code[i]);
+      }
+      lcd.clear();
+      displayMessage(MSG_CHANGED);
+      delay(2000);
+    } else {
+      lcd.clear();
+      displayMessage(MSG_NOT_MATCH);
+      delay(2000);
+    }
+  } else {
+    lcd.clear();
+    displayMessage(MSG_WRONG);
+    delay(2000);
+  }
+}
+
+void GetNewCode1(Keypad& myKeypad, char* check, byte& i, byte& j) {
+  i = 0; j = 0;
+  lcd.clear();
+  displayMessage(MSG_NEW_CODE);
+  displayMessage(MSG_PRESS_A, 1);
+  delay(2000);
+  lcd.clear();
+  displayMessage(MSG_PRESS_A, 1);
+  char keypressed;
+  while (keypressed != 'A') {
+    keypressed = myKeypad.getKey();
+    if (keypressed != NO_KEY && keypressed != 'A') {
+      lcd.setCursor(j, 0);
+      lcd.print(F("*"));
+      check[i] = keypressed;
+      i++;
+      j++;
+    }
+  }
+}
+
+void GetNewCode2(Keypad& myKeypad, char* check, byte& i, byte& j) {
+  i = 0; j = 0;
+  lcd.clear();
+  displayMessage(MSG_CONFIRM);
+  displayMessage(MSG_PRESS_A, 1);
+  delay(3000);
+  lcd.clear();
+  displayMessage(MSG_PRESS_A, 1);
+  char keypressed;
+  while (keypressed != 'A') {
+    keypressed = myKeypad.getKey();
+    if (keypressed != NO_KEY && keypressed != 'A') {
+      lcd.setCursor(j, 0);
+      lcd.print(F("*"));
+      check[i] = keypressed;
+      i++;
+      j++;
+    }
+  }
+}
+
+void OpenDoor(Servo& myServo) {
+  lcd.clear();
+  displayMessage(MSG_ACCESS, 0, 1);
+  displayMessage(MSG_WELCOME, 1, 4);
+  digitalWrite(keypadLedPin, HIGH);
+  myServo.write(90);
+  delay(6000);
+  myServo.write(0);
+  digitalWrite(keypadLedPin, LOW);
+}
+
+void initializeAccelChip() {
+  Wire.begin();
+  Wire.beginTransmission(accel_module);
+  Wire.write(0x2D);
+  Wire.write(0);
+  Wire.endTransmission();
+  Wire.beginTransmission(accel_module);
+  Wire.write(0x2D);
+  Wire.write(16);
+  Wire.endTransmission();
+  Wire.beginTransmission(accel_module);
+  Wire.write(0x2D);
+  Wire.write(8);
+  Wire.endTransmission();
+}
+
+void readAccelI2C() {
+  int xyzregister = 0x32;
+  int x, y, z;
+  Wire.beginTransmission(accel_module);
+  Wire.write(xyzregister);
+  Wire.endTransmission();
+  Wire.beginTransmission(accel_module);
+  Wire.requestFrom(accel_module, 6);
+  int i = 0;
+  while (Wire.available()) {
+    accelValues[i] = Wire.read();
+    i++;
+  }
+  Wire.endTransmission();
+  x = (((int)accelValues[1]) << 8) | accelValues[0];
+  y = (((int)accelValues[3]) << 8) | accelValues[2];
+  z = (((int)accelValues[5]) << 8) | accelValues[4];
+  gestureTheta = atan(-y / sqrt(pow(x, 2) + pow(z, 2)));
+}
+
+// Helper Function for I2C Detection
+bool i2cDetect() {
+  Wire.begin();
+  byte error, address;
+  for (address = 1; address < 127; address++) {
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+    if (error == 0) {
+      if (address == 0x27 || address == 0x3F || address == accel_module) return true;
+    }
+  }
+  return false;
+}
+
+// Function to detect ADXL345 at I2C addresses 0x53 or 0x1D
+bool detectADXL345() {
+  const uint8_t ADXL345_ADDRESSES[] = {0x53, 0x1D}; // ADXL345 addresses
+  const uint8_t NUM_ADDRESSES = 2;
+  const uint8_t ADXL345_DEVID = 0xE5; // ADXL345 DEVID value
+  const uint8_t DEVID_REG = 0x00; // DEVID register address
+
+  Serial.println(F("Scanning for ADXL345..."));
+
+  for (uint8_t i = 0; i < NUM_ADDRESSES; i++) {
+    uint8_t address = ADXL345_ADDRESSES[i];
+    
+    // Check if a device responds at the current address
+    Wire.beginTransmission(address);
+    byte error = Wire.endTransmission();
+    
+    if (error == 0) {
+      Serial.print(F("Device found at 0x"));
+      Serial.println(address, HEX);
+      
+      // Attempt to read the DEVID register
+      Wire.beginTransmission(address);
+      Wire.write(DEVID_REG); // Request DEVID register
+      if (Wire.endTransmission(false) != 0) {
+        Serial.print(F("Failed to set DEVID register at 0x"));
+        Serial.println(address, HEX);
+        continue;
+      }
+
+      // Request 1 byte from the device
+      uint8_t bytesReceived = Wire.requestFrom(address, (uint8_t)1);
+      if (bytesReceived == 1 && Wire.available()) {
+        uint8_t devid = Wire.read();
+        Serial.print(F("DEVID at 0x"));
+        Serial.print(address, HEX);
+        Serial.print(F(": 0x"));
+        Serial.println(devid, HEX);
+
+        if (devid == ADXL345_DEVID) {
+          adxlAddress = address; // Store detected address
+          Serial.print(F("ADXL345 confirmed at 0x"));
+          Serial.println(address, HEX);
+          return true;
+        } else {
+          Serial.print(F("Device at 0x"));
+          Serial.print(address, HEX);
+          Serial.println(F(" is NOT ADXL345 (wrong DEVID)"));
+        }
+      } else {
+        Serial.print(F("Failed to read DEVID at 0x"));
+        Serial.print(address, HEX);
+        Serial.print(F(" (bytes received: "));
+        Serial.print(bytesReceived);
+        Serial.println(F(")"));
+      }
+    } else {
+      Serial.print(F("No response at 0x"));
+      Serial.print(address, HEX);
+      Serial.print(F(", error: "));
+      Serial.println(error);
+    }
+  }
+  
+  Serial.println(F("ADXL345 not detected"));
+  adxlAddress = 0; // Reset address if not found
+  return false;
+}
+
+// Helper Function for Analog Detection
+bool analogDetect(int pin) {
+  const int samples = 5;
+  const int iterations = 2;
+  int iter = 0;
+  while (iter < iterations) {
+    long sumReadings = 0;
+    for (int i = 0; i < samples; i++) {
+      sumReadings += analogRead(pin);
+      delay(10);
+    }
+    int avgValue = sumReadings / samples;
+    if (avgValue >= 50 && avgValue <= 1000) {
+      iter++;
+      if (iter >= iterations) return true;
+    } else {
+      return false;
+    }
+    delay(100);
+  }
+  return false;
+}
+
+// Helper Function for Ultrasonic Detection
+bool detectUltrasonic(int trigPin, int echoPin) {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  long duration = pulseIn(echoPin, HIGH, 30000); // Timeout after 30ms
+  int distance = duration / 58.2;
+  return duration > 0 && distance >= 2 && distance <= 400;
+}
+
+// Helper Function for Pin Activity
+bool checkPinActivity(int pin) {
+  pinMode(pin, INPUT_PULLUP);
+  return digitalRead(pin) == LOW;
+}
+
+// Helper Function for Standby Mode
+void enterStandbyMode() {
+  static unsigned long lastBlink = 0;
+  if (millis() - lastBlink >= ERROR_BLINK_INTERVAL) {
+    digitalWrite(PIN_D13, !digitalRead(PIN_D13));
+    lastBlink = millis();
+  }
+}
+
+// Helper Function for Error Indication
+void indicateError() {
+  if (millis() - lastErrorBlink >= ERROR_BLINK_INTERVAL) {
+    digitalWrite(PIN_D13, !digitalRead(PIN_D13));
+    Serial.println(F("Error: Component disconnected"));
+    lastErrorBlink = millis();
+  }
+}
+
+// Component Detection Logic
+void detectComponents() {
+  if (activityLocked) return;
+  Serial.println(F("Detecting components..."));
+
+  // Collision Detection Detection
+  // Requires: Ultrasonic (D12, D13), LEDs (D3-D7), buzzer (D9)
+  if (checkPinActivity(PIN_D3) && checkPinActivity(PIN_D4) && checkPinActivity(PIN_D5) && 
+      checkPinActivity(PIN_D6) && checkPinActivity(PIN_D7) && checkPinActivity(PIN_D9) && checkPinActivity(PIN_D13)) {
+    currentActivity = COLLISION_DETECTION;
+    pinMode(PIN_D12, OUTPUT);
+    pinMode(PIN_D13, INPUT);
+    for (int i = 0; i < collisionLedCount; i++) {
+      pinMode(collisionLedPins[i], OUTPUT);
+      digitalWrite(collisionLedPins[i], LOW);
+    }
+    pinMode(PIN_D9, OUTPUT);
+    digitalWrite(PIN_D9, LOW);
+    Serial.println(F("Activity: Collision Detection Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Liquid Level Monitoring Detection
+  // Requires: Ultrasonic (D12, D13), display (D2, D3), LEDs (D4, D45)
+  else if (!checkPinActivity(PIN_D4) && checkPinActivity(PIN_D5) && checkPinActivity(PIN_D6) && !checkPinActivity(PIN_D7) && checkPinActivity(PIN_D13)) {
+    currentActivity = LIQUID_LEVEL_MONITORING;
+    pinMode(PIN_D12, OUTPUT);
+    pinMode(PIN_D13, INPUT);
+    pinMode(PIN_D2, OUTPUT);
+    pinMode(PIN_D3, OUTPUT);
+    pinMode(PIN_D5, OUTPUT); // Green LED
+    pinMode(PIN_D6, OUTPUT); // Red LED
+    display.setBrightness(0x0a);
+    Serial.println(F("Activity: Liquid Level Monitoring Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Rain Alert System Detection
+  // Requires: Sensor (A0), LED (D7), buzzer (D8)
+  else if (checkPinActivity(PIN_D7) && checkPinActivity(PIN_D8)) {
+    currentActivity = RAIN_ALERT_SYSTEM;
+    pinMode(PIN_D7, OUTPUT);
+    pinMode(PIN_D8, OUTPUT);
+    digitalWrite(PIN_D7, LOW);
+    digitalWrite(PIN_D8, LOW);
+    Serial.println(F("Activity: Rain Alert System Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Keypad Lock System Detection
+  // Requires: Keypad (D3-D10), servo (D9), LED (D12), LCD (A4, A5)
+  else if (checkPinActivity(PIN_D12) && !checkPinActivity(PIN_D13) && i2cDetect()) {
+    currentActivity = KEYPAD_LOCK_SYSTEM;
+    pinMode(PIN_D3, OUTPUT);
+    pinMode(PIN_D4, OUTPUT);
+    pinMode(PIN_D5, OUTPUT);
+    pinMode(PIN_D6, OUTPUT);
+    pinMode(PIN_D7, INPUT);
+    pinMode(PIN_D8, INPUT);
+    pinMode(PIN_D9, INPUT);
+    pinMode(PIN_D10, INPUT);
+    pinMode(PIN_D12, OUTPUT);
+    digitalWrite(PIN_D12, LOW);
+    initLCD();
+    myServo.attach(PIN_D11);
+    myServo.write(0);
+    displayMessage(MSG_ENTER_CODE);
+    displayMessage(MSG_DOOR, 1, 1);
+    Serial.println(F("Activity: Keypad Lock System Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Gesture Controlled Servo Detection
+  // Requires: Accelerometer (I2C 0x53), servo (D9)
+  else if (detectADXL345()) {
+    currentActivity = GESTURE_CONTROLLED_SERVO;
+    pinMode(PIN_D9, OUTPUT);
+    initializeAccelChip();
+    Serial.println(F("Activity: Gesture Controlled Servo Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Bluetooth Controlled RGB Detection
+  // Requires: Bluetooth (D2, D3), RGB (D9-D11), jumper (D8), state (D11)
+  else if (!checkPinActivity(PIN_D3) && !checkPinActivity(PIN_D4) && checkPinActivity(PIN_D5) &&
+           !checkPinActivity(PIN_D6) && !checkPinActivity(PIN_D7)) {
+    currentActivity = BLUETOOTH_CONTROLLED_RGB;
+    pinMode(PIN_D9, OUTPUT);
+    pinMode(PIN_D10, OUTPUT);
+    pinMode(PIN_D11, OUTPUT);
+    pinMode(PIN_D8, INPUT_PULLUP);
+    isCommonCathode = (digitalRead(PIN_D8) == LOW);
+    int off = isCommonCathode ? 0 : 255;
+    analogWrite(PIN_D9, off);
+    analogWrite(PIN_D10, off);
+    analogWrite(PIN_D11, off);
+    BTSerial.begin(9600);
+    Serial.println(F("Activity: Bluetooth Controlled RGB Detected - Running"));
+    activityLocked = true;
+  }
+
+  // Rotary Encoder Motor Detection
+  // Requires: Encoder (D2-D4), motor (D8-D10)
+  else{                                        //(checkPinActivity(PIN_D2) && checkPinActivity(PIN_D3) && checkPinActivity(PIN_D4))
+    currentActivity = ROTARY_ENCODER_MOTOR;
+    pinMode(PIN_D2, INPUT_PULLUP);
+    pinMode(PIN_D3, INPUT_PULLUP);
+    pinMode(PIN_D4, INPUT_PULLUP);
+    pinMode(PIN_D8, OUTPUT);
+    pinMode(PIN_D9, OUTPUT);
+    pinMode(PIN_D10, OUTPUT);
+    attachInterrupt(digitalPinToInterrupt(PIN_D2), readEncoder, CHANGE);
+    Serial.println(F("Activity: Rotary Encoder Motor Detected - Running"));
+    activityLocked = true;
+  }
+
+  // No Activity Detected
+//  else {
+//    currentActivity = NONE;
+//    Serial.println(F("No valid components detected - Entering standby mode"));
+//  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  for (int i = 0; i < DETECT_PIN_COUNT; i++) {
+    pinMode(DETECT_PINS[i], INPUT_PULLUP);
+  }
+  Wire.begin();
+  detectComponents();
+}
+
+void loop() {
+  if (errorState) {
+    indicateError();
+    return;
+  }
+  if (!activityLocked) {
+    if (millis() - lastActivityCheck >= ACTIVITY_CHECK_INTERVAL) {
+      detectComponents();
+      lastActivityCheck = millis();
+    }
+  }
+
+  switch (currentActivity) {
+    case COLLISION_DETECTION: runCollisionDetection(); break;
+    case LIQUID_LEVEL_MONITORING: runLiquidLevelMonitoring(); break;
+    case RAIN_ALERT_SYSTEM: runRainAlertSystem(); break;
+    case KEYPAD_LOCK_SYSTEM: runKeypadLockSystem(); break;
+    case GESTURE_CONTROLLED_SERVO: runGestureControlledServo(); break;
+    case BLUETOOTH_CONTROLLED_RGB: runBluetoothControlledRGB(); break;
+    case ROTARY_ENCODER_MOTOR: runRotaryEncoderMotor(); break;
+    case NONE: enterStandbyMode(); break;
+  }
+}`,
+                    zipUrl: "https://drive.google.com/file/d/14Oi_qgORLHH59g-ZHd1ZU1kDbBmy7jdr/preview",
+                    zipFilename: "gold-challenge-code.zip"
+                }
+            },
+            platinum: {
+                pdf: {
+                    title: "Platinum Challenge PDF",
+                    url: "",
+                    filename: "platinum-challenge.pdf"
+                },
+                code: {
+                    title: "Platinum Challenge Code",
+                    content: ``,
+                    zipUrl: "",
+                    zipFilename: "platinum-challenge-code.zip"
+                }
+            },
+            diamond: {
+                pdf: {
+                    title: "Diamond Challenge PDF",
+                    url: "",
+                    filename: "diamond-challenge.pdf"
+                },
+                code: {
+                    title: "Diamond Challenge Code",
+                    content: ``,
+                    
+                    zipUrl: "",
+                    zipFilename: "diamond-challenge-code.zip"
+                }
+            }
+        };
+
+        
+        function openModal(challenge, type) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const pdfContent = document.getElementById('pdf-content');
+            const codeContent = document.getElementById('code-content');
+            const pdfViewer = document.getElementById('pdf-viewer');
+            const downloadPdfLink = document.getElementById('download-pdf-link');
+            const codeText = document.getElementById('code-text');
+            const downloadZipLink = document.getElementById('download-zip-link');
+
+            const content = challengeContent[challenge][type];
+            
+            modalTitle.textContent = content.title;
+            
+            if (type === 'pdf') {
+                pdfContent.style.display = 'block';
+                codeContent.style.display = 'none';
+                pdfViewer.src = content.url;
+                downloadPdfLink.href = content.url;
+                downloadPdfLink.download = content.filename;
+            } else {
+                pdfContent.style.display = 'none';
+                codeContent.style.display = 'block';
+                codeText.textContent = content.content;
+                downloadZipLink.href = content.zipUrl;
+                downloadZipLink.download = content.zipFilename;
+            }
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+           
+            const pdfViewer = document.getElementById('pdf-viewer');
+            pdfViewer.src = '';
+        }
+
+      
+        function printPdf() {
+            const pdfViewer = document.getElementById('pdf-viewer');
+            const pdfWindow = pdfViewer.contentWindow;
+            pdfWindow.focus();
+            pdfWindow.print();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
